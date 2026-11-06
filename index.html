@@ -18,14 +18,11 @@
   --max:1240px;--r:16px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:#07080a}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Space Grotesk",Arial,sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:
-  radial-gradient(900px 500px at 78% -10%,rgba(204,245,109,.09),transparent 65%),
-  radial-gradient(700px 500px at 5% 15%,rgba(90,130,255,.07),transparent 70%)}
-body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;
-  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
-  background-size:64px 64px;mask-image:linear-gradient(to bottom,#000 0%,transparent 70%)}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.3;
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:linear-gradient(to bottom,#000 0%,transparent 72%)}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;color:inherit}
@@ -33,6 +30,19 @@ input{font:inherit}
 .shell{width:min(var(--max),calc(100% - 56px));margin-inline:auto}
 .mono{font-family:"DM Mono",monospace}
 ::selection{background:var(--accent);color:#0b1004}
+
+/* ---------- animated background ---------- */
+.bg-aurora{position:fixed;inset:0;z-index:-3;overflow:hidden;pointer-events:none;background:#07080a}
+.bg-aurora i{position:absolute;display:block;border-radius:50%;filter:blur(74px);opacity:.45;mix-blend-mode:screen;will-change:transform}
+.bg-aurora .a1{width:62vw;height:62vw;left:-14vw;top:-16vw;background:radial-gradient(circle,rgba(163,230,53,.42),rgba(163,230,53,0) 66%);animation:blob1 30s ease-in-out infinite alternate}
+.bg-aurora .a2{width:54vw;height:54vw;right:-12vw;top:4vh;background:radial-gradient(circle,rgba(56,189,248,.32),rgba(56,189,248,0) 66%);animation:blob2 38s ease-in-out infinite alternate}
+.bg-aurora .a3{width:58vw;height:58vw;left:18vw;bottom:-26vw;background:radial-gradient(circle,rgba(139,92,246,.28),rgba(139,92,246,0) 66%);animation:blob3 44s ease-in-out infinite alternate}
+.bg-aurora .grain{position:absolute;inset:0;border-radius:0;filter:none;opacity:.35;mix-blend-mode:normal;background-image:radial-gradient(rgba(255,255,255,.16) .5px,transparent .5px);background-size:3px 3px}
+#bgParticles{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.85}
+@keyframes blob1{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(6vw,4vh,0) scale(1.12)}100%{transform:translate3d(-3vw,8vh,0) scale(.96)}}
+@keyframes blob2{0%{transform:translate3d(0,0,0) scale(1.05)}50%{transform:translate3d(-7vw,7vh,0) scale(.92)}100%{transform:translate3d(3vw,-4vh,0) scale(1.16)}}
+@keyframes blob3{0%{transform:translate3d(0,0,0) scale(.95)}50%{transform:translate3d(5vw,-6vh,0) scale(1.14)}100%{transform:translate3d(-6vw,2vh,0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.bg-aurora i{animation:none!important}}
 
 /* ---------- top bar ---------- */
 .topbar{border-bottom:1px solid var(--line);font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#949c9a;background:rgba(8,9,11,.6);backdrop-filter:blur(10px)}
@@ -276,6 +286,8 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:44px 0 34px;back
 </head>
 <body>
 
+<div class="bg-aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i><i class="grain"></i></div>
+<canvas id="bgParticles" aria-hidden="true"></canvas>
 <div class="topbar"><div class="shell">
   <span><i class="dot"></i>Entrega inmediata por ID</span>
   <span class="hide-s">Atención directa 1:1 · Cuba</span>
@@ -319,10 +331,10 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:44px 0 34px;back
     </div>
   </div>
   <div class="mosaic">
-    <span class="badge">+40 CUP · +20 SALDO</span>
-    <div class="shot s1"><img src="https://oficialnextlevel.com/assets/games/free-fire-banner.webp?v=18" alt="Free Fire"><span>Free Fire</span></div>
-    <div class="shot s2"><img src="https://oficialnextlevel.com/assets/games/genshin-impact-banner.webp?v=18" alt="Genshin Impact"><span>Genshin Impact</span></div>
-    <div class="shot s3"><img src="https://oficialnextlevel.com/assets/games/roblox-banner.webp?v=18" alt="Roblox"><span>Roblox</span></div>
+    <span class="badge">Entrega en minutos</span>
+    <div class="shot s1"><img src="assets/free-fire.webp" alt="Free Fire"><span>Free Fire</span></div>
+    <div class="shot s2"><img src="assets/genshin-impact.webp" alt="Genshin Impact"><span>Genshin Impact</span></div>
+    <div class="shot s3"><img src="assets/roblox.webp" alt="Roblox"><span>Roblox</span></div>
   </div>
 </section>
 
@@ -334,7 +346,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:44px 0 34px;back
       <span class="eyebrow">01 — Catálogo</span>
       <h2>Elige tu juego y tu recarga.</h2>
     </div>
-    <p>Precios finales en CUP y en saldo, ya con el margen incluido. Sin cargos ocultos al confirmar.</p>
+    <p>Precios finales en CUP y en saldo. Sin cargos ocultos al confirmar tu pedido.</p>
   </div>
   <div class="toolbar">
     <div class="chips" id="chips"></div>
@@ -367,7 +379,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:44px 0 34px;back
   </div>
   <div class="steps">
     <article class="step" data-n="01"><div class="ic">◈</div><h3>Arma tu carrito</h3><p>Añade uno o varios paquetes de cualquier juego. Puedes combinar CUP y saldo en un mismo pedido.</p></article>
-    <article class="step" data-n="02"><div class="ic">◎</div><h3>Confirma el total</h3><p>El precio que ves ya incluye el margen de +40 CUP o +20 de saldo. Sin sorpresas al pagar.</p></article>
+    <article class="step" data-n="02"><div class="ic">◎</div><h3>Confirma el total</h3><p>El total se calcula al instante según el método de pago que elijas. Sin sorpresas al pagar.</p></article>
     <article class="step" data-n="03"><div class="ic">↗</div><h3>Coordina por WhatsApp</h3><p>Se abre un chat con el resumen de tu pedido. Entregas tu ID de jugador y listo: recarga en minutos.</p></article>
   </div>
 </section>
@@ -432,10 +444,11 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:44px 0 34px;back
 <div class="toast" id="toast"></div>
 
 <script>
-const GAMES=[{"id":"free-fire","name":"Free Fire","unit":"Diamantes","img":"free-fire","items":[{"n":"110 Diamantes","k":"coin","d":null,"cup":910,"saldo":280},{"n":"Membresía Semanal","k":"offer","d":"Membresía semanal: efectiva por 7 días. Recibirás 60 diamantes directos y 40 diamantes diarios, para un total de 340 diamantes.","cup":1900,"saldo":575},{"n":"Booyah Pass","k":"offer","d":null,"cup":2645,"saldo":800},{"n":"341 Diamantes","k":"coin","d":null,"cup":2705,"saldo":815},{"n":"572 Diamantes","k":"coin","d":null,"cup":4505,"saldo":1355},{"n":"1166 Diamantes","k":"coin","d":null,"cup":8335,"saldo":2500},{"n":"Membresía Mensual","k":"offer","d":"Membresía mensual: efectiva por 30 días. Recibirás 300 diamantes directos y 50 diamantes diarios, para un total de 1800 diamantes.","cup":9015,"saldo":2705},{"n":"2398 Diamantes","k":"coin","d":null,"cup":16365,"saldo":4905},{"n":"6160 Diamantes","k":"coin","d":null,"cup":41205,"saldo":12330}],"reg":"LATAM & USA · Indonesia"},{"id":"blood-strike","name":"Blood Strike","unit":"Gold (BC)","img":"blood-strike","items":[{"n":"51 BC","k":"coin","d":null,"cup":560,"saldo":175},{"n":"105 BC","k":"coin","d":null,"cup":970,"saldo":300},{"n":"Semana de Bolsa de la Suerte","k":"offer","d":null,"cup":1070,"saldo":330},{"n":"Level Up Pass","k":"offer","d":null,"cup":2140,"saldo":650},{"n":"320 BC","k":"coin","d":null,"cup":2960,"saldo":895},{"n":"Strike Pass Elite","k":"offer","d":null,"cup":4155,"saldo":1250},{"n":"540 BC","k":"coin","d":null,"cup":4830,"saldo":1455},{"n":"Strike Pass Premium","k":"offer","d":null,"cup":9320,"saldo":2795},{"n":"1100 BC","k":"coin","d":null,"cup":9775,"saldo":2930},{"n":"2260 BC","k":"coin","d":null,"cup":19395,"saldo":5810},{"n":"5800 BC","k":"coin","d":null,"cup":48235,"saldo":14435}],"reg":"Global"},{"id":"mobile-legends","name":"Mobile Legends","unit":"Diamantes","img":"mobile-legends","items":[{"n":"Weekly Elite Pack","k":"offer","d":null,"cup":1015,"saldo":310},{"n":"50 + 5 Diamonds","k":"coin","d":null,"cup":1020,"saldo":315},{"n":"Weekly Pass","k":"offer","d":null,"cup":1865,"saldo":565},{"n":"156 + 16 Diamonds","k":"coin","d":null,"cup":3030,"saldo":915},{"n":"250 + 25 Diamonds","k":"coin","d":null,"cup":4705,"saldo":1415},{"n":"Monthly Elite Pack","k":"offer","d":null,"cup":4935,"saldo":1485},{"n":"500 + 65 Diamonds","k":"coin","d":null,"cup":9615,"saldo":2885},{"n":"Twilight Pass","k":"offer","d":null,"cup":10050,"saldo":3015},{"n":"625 + 81 Diamonds","k":"coin","d":null,"cup":11795,"saldo":3535},{"n":"1860 + 335 Diamonds","k":"coin","d":null,"cup":35605,"saldo":10660},{"n":"3099 + 589 Diamonds","k":"coin","d":null,"cup":59375,"saldo":17765}],"reg":"Global · United States"},{"id":"arena-breakout","name":"Arena Breakout","unit":"Bonos","img":"arena-breakout","items":[{"n":"Beginner Select","k":"offer","d":null,"cup":975,"saldo":300},{"n":"66 Bonds","k":"coin","d":null,"cup":1070,"saldo":330},{"n":"Monthly Advanced Battle Pass Activation Pass","k":"offer","d":null,"cup":1150,"saldo":350},{"n":"Bulletproof Case (30d)","k":"offer","d":null,"cup":2860,"saldo":865},{"n":"Bulletproof Case Privileges","k":"offer","d":null,"cup":2935,"saldo":885},{"n":"Monthly Premium Battle Pass Activation Pass","k":"offer","d":null,"cup":4505,"saldo":1355},{"n":"335 Bonds","k":"coin","d":null,"cup":5225,"saldo":1570},{"n":"Composition Case (30d)","k":"offer","d":null,"cup":8555,"saldo":2565},{"n":"Composite Case Privileges","k":"offer","d":null,"cup":8740,"saldo":2625},{"n":"675 Bonds","k":"coin","d":null,"cup":10440,"saldo":3130},{"n":"Quarterly Premium Battle Pass Bundle Activation Pass Bundle","k":"offer","d":null,"cup":13485,"saldo":4040},{"n":"1690 Bonds","k":"coin","d":null,"cup":26025,"saldo":7790},{"n":"3400 Bonds","k":"coin","d":null,"cup":52090,"saldo":15590},{"n":"6820 Bonds","k":"coin","d":null,"cup":103960,"saldo":31105}],"reg":"Global"},{"id":"roblox","name":"Roblox","unit":"Robux","img":"roblox","items":[{"n":"800 Robux","k":"gc","cup":12135,"saldo":3640},{"n":"1000 Robux","k":"gc","cup":14275,"saldo":4280},{"n":"1500 Robux","k":"gc","cup":23560,"saldo":7055},{"n":"2000 Robux","k":"gc","cup":29610,"saldo":8865},{"n":"2500 Robux","k":"gc","cup":35315,"saldo":10570},{"n":"3000 Robux","k":"gc","cup":42500,"saldo":12720},{"n":"4500 Robux","k":"gc","cup":63340,"saldo":18955},{"n":"10000 Robux","k":"gc","cup":131080,"saldo":39215}],"reg":"Global"},{"id":"honor-of-kings","name":"Honor of Kings","unit":"Tokens","img":"honor-of-kings","items":[{"n":"16 Tokens","k":"coin","d":null,"cup":260,"saldo":85},{"n":"80 Tokens","k":"coin","d":null,"cup":1140,"saldo":350},{"n":"240 Tokens","k":"coin","d":null,"cup":3330,"saldo":1005},{"n":"400 Tokens","k":"coin","d":null,"cup":5530,"saldo":1660},{"n":"560 Tokens","k":"coin","d":null,"cup":7730,"saldo":2320},{"n":"830 Tokens","k":"coin","d":null,"cup":11020,"saldo":3305},{"n":"1245 Tokens","k":"coin","d":null,"cup":16510,"saldo":4945},{"n":"2508 Tokens","k":"coin","d":null,"cup":32995,"saldo":9880},{"n":"4180 Tokens","k":"coin","d":null,"cup":54970,"saldo":16450},{"n":"8360 Tokens","k":"coin","d":null,"cup":109905,"saldo":32880}],"reg":"Global"},{"id":"genshin-impact","name":"Genshin Impact","unit":"Cristales Génesis","img":"genshin-impact","items":[{"n":"60 Cristales Génesis","k":"coin","d":null,"cup":1350,"saldo":410},{"n":"Blessing of the Welkin Moon","k":"offer","d":null,"cup":6580,"saldo":1975},{"n":"300 + 30 Cristales Génesis","k":"coin","d":null,"cup":6580,"saldo":1975},{"n":"980 + 110 Cristales Génesis","k":"coin","d":null,"cup":19630,"saldo":5880},{"n":"1980 + 260 Cristales Génesis","k":"coin","d":null,"cup":39220,"saldo":11740},{"n":"3280 + 600 Cristales Génesis","k":"coin","d":null,"cup":65325,"saldo":19545},{"n":"6480 + 1600 Cristales Génesis","k":"coin","d":null,"cup":130595,"saldo":39070}],"reg":"Global"},{"id":"wuthering-waves","name":"Wuthering Waves","unit":"Lunite","img":"wuthering-waves","items":[{"n":"60 Lunite","k":"coin","d":null,"cup":1110,"saldo":340},{"n":"Lunite Subscription","k":"offer","d":null,"cup":5455,"saldo":1640},{"n":"330 Lunite","k":"coin","d":null,"cup":5455,"saldo":1640},{"n":"1090 Lunite","k":"coin","d":null,"cup":16385,"saldo":4910},{"n":"2240 Lunite","k":"coin","d":null,"cup":32745,"saldo":9805},{"n":"3880 Lunite","k":"coin","d":null,"cup":54255,"saldo":16235},{"n":"8080 Lunite","k":"coin","d":null,"cup":106675,"saldo":31915}],"reg":"Global"}];
+let GAMES=[{"id":"free-fire","name":"Free Fire","unit":"Diamantes","img":"free-fire","items":[{"n":"110 Diamantes","k":"coin","d":null,"cup":910,"saldo":280},{"n":"Membresía Semanal","k":"offer","d":"Membresía semanal: efectiva por 7 días. Recibirás 60 diamantes directos y 40 diamantes diarios, para un total de 340 diamantes.","cup":1900,"saldo":575},{"n":"Booyah Pass","k":"offer","d":null,"cup":2645,"saldo":800},{"n":"341 Diamantes","k":"coin","d":null,"cup":2705,"saldo":815},{"n":"572 Diamantes","k":"coin","d":null,"cup":4505,"saldo":1355},{"n":"1166 Diamantes","k":"coin","d":null,"cup":8335,"saldo":2500},{"n":"Membresía Mensual","k":"offer","d":"Membresía mensual: efectiva por 30 días. Recibirás 300 diamantes directos y 50 diamantes diarios, para un total de 1800 diamantes.","cup":9015,"saldo":2705},{"n":"2398 Diamantes","k":"coin","d":null,"cup":16365,"saldo":4905},{"n":"6160 Diamantes","k":"coin","d":null,"cup":41205,"saldo":12330}],"reg":"LATAM & USA · Indonesia"},{"id":"blood-strike","name":"Blood Strike","unit":"Gold (BC)","img":"blood-strike","items":[{"n":"51 BC","k":"coin","d":null,"cup":560,"saldo":175},{"n":"105 BC","k":"coin","d":null,"cup":970,"saldo":300},{"n":"Semana de Bolsa de la Suerte","k":"offer","d":null,"cup":1070,"saldo":330},{"n":"Level Up Pass","k":"offer","d":null,"cup":2140,"saldo":650},{"n":"320 BC","k":"coin","d":null,"cup":2960,"saldo":895},{"n":"Strike Pass Elite","k":"offer","d":null,"cup":4155,"saldo":1250},{"n":"540 BC","k":"coin","d":null,"cup":4830,"saldo":1455},{"n":"Strike Pass Premium","k":"offer","d":null,"cup":9320,"saldo":2795},{"n":"1100 BC","k":"coin","d":null,"cup":9775,"saldo":2930},{"n":"2260 BC","k":"coin","d":null,"cup":19395,"saldo":5810},{"n":"5800 BC","k":"coin","d":null,"cup":48235,"saldo":14435}],"reg":"Global"},{"id":"mobile-legends","name":"Mobile Legends","unit":"Diamantes","img":"mobile-legends","items":[{"n":"Weekly Elite Pack","k":"offer","d":null,"cup":1015,"saldo":310},{"n":"50 + 5 Diamonds","k":"coin","d":null,"cup":1020,"saldo":315},{"n":"Weekly Pass","k":"offer","d":null,"cup":1865,"saldo":565},{"n":"156 + 16 Diamonds","k":"coin","d":null,"cup":3030,"saldo":915},{"n":"250 + 25 Diamonds","k":"coin","d":null,"cup":4705,"saldo":1415},{"n":"Monthly Elite Pack","k":"offer","d":null,"cup":4935,"saldo":1485},{"n":"500 + 65 Diamonds","k":"coin","d":null,"cup":9615,"saldo":2885},{"n":"Twilight Pass","k":"offer","d":null,"cup":10050,"saldo":3015},{"n":"625 + 81 Diamonds","k":"coin","d":null,"cup":11795,"saldo":3535},{"n":"1860 + 335 Diamonds","k":"coin","d":null,"cup":35605,"saldo":10660},{"n":"3099 + 589 Diamonds","k":"coin","d":null,"cup":59375,"saldo":17765}],"reg":"Global · United States"},{"id":"arena-breakout","name":"Arena Breakout","unit":"Bonos","img":"arena-breakout","items":[{"n":"Beginner Select","k":"offer","d":null,"cup":975,"saldo":300},{"n":"66 Bonds","k":"coin","d":null,"cup":1070,"saldo":330},{"n":"Monthly Advanced Battle Pass Activation Pass","k":"offer","d":null,"cup":1150,"saldo":350},{"n":"Bulletproof Case (30d)","k":"offer","d":null,"cup":2860,"saldo":865},{"n":"Bulletproof Case Privileges","k":"offer","d":null,"cup":2935,"saldo":885},{"n":"Monthly Premium Battle Pass Activation Pass","k":"offer","d":null,"cup":4505,"saldo":1355},{"n":"335 Bonds","k":"coin","d":null,"cup":5225,"saldo":1570},{"n":"Composition Case (30d)","k":"offer","d":null,"cup":8555,"saldo":2565},{"n":"Composite Case Privileges","k":"offer","d":null,"cup":8740,"saldo":2625},{"n":"675 Bonds","k":"coin","d":null,"cup":10440,"saldo":3130},{"n":"Quarterly Premium Battle Pass Bundle Activation Pass Bundle","k":"offer","d":null,"cup":13485,"saldo":4040},{"n":"1690 Bonds","k":"coin","d":null,"cup":26025,"saldo":7790},{"n":"3400 Bonds","k":"coin","d":null,"cup":52090,"saldo":15590},{"n":"6820 Bonds","k":"coin","d":null,"cup":103960,"saldo":31105}],"reg":"Global"},{"id":"roblox","name":"Roblox","unit":"Robux","img":"roblox","items":[{"n":"800 Robux","k":"gc","cup":12135,"saldo":3640},{"n":"1000 Robux","k":"gc","cup":14275,"saldo":4280},{"n":"1500 Robux","k":"gc","cup":23560,"saldo":7055},{"n":"2000 Robux","k":"gc","cup":29610,"saldo":8865},{"n":"2500 Robux","k":"gc","cup":35315,"saldo":10570},{"n":"3000 Robux","k":"gc","cup":42500,"saldo":12720},{"n":"4500 Robux","k":"gc","cup":63340,"saldo":18955},{"n":"10000 Robux","k":"gc","cup":131080,"saldo":39215}],"reg":"Global"},{"id":"honor-of-kings","name":"Honor of Kings","unit":"Tokens","img":"honor-of-kings","items":[{"n":"16 Tokens","k":"coin","d":null,"cup":260,"saldo":85},{"n":"80 Tokens","k":"coin","d":null,"cup":1140,"saldo":350},{"n":"240 Tokens","k":"coin","d":null,"cup":3330,"saldo":1005},{"n":"400 Tokens","k":"coin","d":null,"cup":5530,"saldo":1660},{"n":"560 Tokens","k":"coin","d":null,"cup":7730,"saldo":2320},{"n":"830 Tokens","k":"coin","d":null,"cup":11020,"saldo":3305},{"n":"1245 Tokens","k":"coin","d":null,"cup":16510,"saldo":4945},{"n":"2508 Tokens","k":"coin","d":null,"cup":32995,"saldo":9880},{"n":"4180 Tokens","k":"coin","d":null,"cup":54970,"saldo":16450},{"n":"8360 Tokens","k":"coin","d":null,"cup":109905,"saldo":32880}],"reg":"Global"},{"id":"genshin-impact","name":"Genshin Impact","unit":"Cristales Génesis","img":"genshin-impact","items":[{"n":"60 Cristales Génesis","k":"coin","d":null,"cup":1350,"saldo":410},{"n":"Blessing of the Welkin Moon","k":"offer","d":null,"cup":6580,"saldo":1975},{"n":"300 + 30 Cristales Génesis","k":"coin","d":null,"cup":6580,"saldo":1975},{"n":"980 + 110 Cristales Génesis","k":"coin","d":null,"cup":19630,"saldo":5880},{"n":"1980 + 260 Cristales Génesis","k":"coin","d":null,"cup":39220,"saldo":11740},{"n":"3280 + 600 Cristales Génesis","k":"coin","d":null,"cup":65325,"saldo":19545},{"n":"6480 + 1600 Cristales Génesis","k":"coin","d":null,"cup":130595,"saldo":39070}],"reg":"Global"},{"id":"wuthering-waves","name":"Wuthering Waves","unit":"Lunite","img":"wuthering-waves","items":[{"n":"60 Lunite","k":"coin","d":null,"cup":1110,"saldo":340},{"n":"Lunite Subscription","k":"offer","d":null,"cup":5455,"saldo":1640},{"n":"330 Lunite","k":"coin","d":null,"cup":5455,"saldo":1640},{"n":"1090 Lunite","k":"coin","d":null,"cup":16385,"saldo":4910},{"n":"2240 Lunite","k":"coin","d":null,"cup":32745,"saldo":9805},{"n":"3880 Lunite","k":"coin","d":null,"cup":54255,"saldo":16235},{"n":"8080 Lunite","k":"coin","d":null,"cup":106675,"saldo":31915}],"reg":"Global"}];
+const DATA_FILE="data.json";
 
 const WHATSAPP="5352164763";
-const IMG="https://oficialnextlevel.com/assets/games/";
+const IMG="assets/";
 const CUR_KEY="nox_currency";
 let currency=localStorage.getItem(CUR_KEY)||"cup";
 let selected=null, currentGame=null, cart=[];
@@ -453,8 +466,8 @@ function setCurrency(c){
   try{localStorage.setItem(CUR_KEY,c)}catch(e){}
   document.querySelectorAll("[data-cur]").forEach(b=>b.classList.toggle("on",b.dataset.cur===c));
   document.getElementById("payNote").textContent=c==="cup"
-    ? "Precios finales en CUP (incluye +40 CUP por paquete)."
-    : "Precios finales en saldo (incluye +20 de saldo por paquete).";
+    ? "Precios finales en CUP por paquete."
+    : "Precios finales en saldo por paquete.";
   renderGames();renderOffers();renderModal();renderCart();updateSelected();
 }
 
@@ -473,7 +486,7 @@ function renderGames(){
   document.getElementById("grid").innerHTML=list.map(g=>{
     const off=offersOf(g).length;
     return '<button class="card" onclick="openGame(\''+g.id+'\')">'
-      +'<div class="card-media"><img loading="lazy" src="'+IMG+g.img+'-banner.webp?v=18" alt="Recargas '+esc(g.name)+'">'
+      +'<div class="card-media"><img loading="lazy" src="'+IMG+g.img+'.webp" alt="Recargas '+esc(g.name)+'">'
       +'<span class="card-tag">'+(isGift(g)?"Gift card":"Recarga")+'</span>'
       +(off?'<span class="card-tag offer">'+off+' ofertas</span>':'')
       +'</div><div class="card-body"><h3>'+esc(g.name)+'</h3><span class="unit">'+esc(unitOf(g))+' · '+g.items.length+' paquetes</span>'
@@ -486,7 +499,7 @@ function renderOffers(){
   GAMES.forEach(g=>{const o=offersOf(g)[0];if(o)picks.push({g:g,it:o})});
   document.getElementById("offerGrid").innerHTML=picks.slice(0,8).map(p=>
     '<button class="card" onclick="openGame(\''+p.g.id+'\')">'
-    +'<div class="card-media"><img loading="lazy" src="'+IMG+p.g.img+'-banner.webp?v=18" alt="'+esc(p.g.name)+'">'
+    +'<div class="card-media"><img loading="lazy" src="'+IMG+p.g.img+'.webp" alt="'+esc(p.g.name)+'">'
     +'<span class="card-tag offer">Oferta extra</span></div>'
     +'<div class="card-body"><h3>'+esc(p.it.n)+'</h3><span class="unit">'+esc(p.g.name)+'</span>'
     +'<div class="card-foot"><span class="card-from"><small>Precio</small>'+money(priceOf(p.it))+'</span><span class="card-go">↗</span></div>'
@@ -497,7 +510,7 @@ function renderOffers(){
 function openGame(id){
   currentGame=GAMES.find(g=>g.id===id);selected=null;
   if(!currentGame)return;
-  document.getElementById("mImg").src=IMG+currentGame.img+"-banner.webp?v=18";
+  document.getElementById("mImg").src=IMG+currentGame.img+".webp";
   document.getElementById("mTitle").textContent=currentGame.name;
   document.getElementById("mSub").textContent=unitOf(currentGame)+" · "+currentGame.items.length+" paquetes";
   renderModal();updateSelected();
@@ -567,7 +580,7 @@ function renderCart(){
   document.getElementById("cartMeta").textContent=cart.length+(cart.length===1?" artículo":" artículos")+" · "+currencyLabel();
   document.getElementById("cartTotal").textContent=cart.length?money(total()):(currency==="cup"?"0 CUP":"0 saldo");
   if(!cart.length){list.innerHTML='<div class="cart-empty">Tu carrito está vacío.<br>Elige un juego y añade tu primera recarga.</div>';return}
-  list.innerHTML=cart.map((c,i)=>'<div class="cart-item"><img src="'+IMG+c.img+'-banner.webp?v=18" alt="">'
+  list.innerHTML=cart.map((c,i)=>'<div class="cart-item"><img src="'+IMG+c.img+'.webp" alt="">'
     +'<div class="ci-main"><b>'+esc(c.item)+'</b><small>'+esc(c.game)+'</small></div>'
     +'<span class="ci-price">'+money(currency==="cup"?c.cup:c.saldo)+'</span>'
     +'<button class="ci-del" onclick="removeItem('+i+')" aria-label="Quitar">×</button></div>').join("");
@@ -593,6 +606,80 @@ function openCartOrWhats(){
   if(cart.length)toggleCart(true);
   else window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent("Hola NOX, necesito ayuda para elegir una recarga."),"_blank","noopener");
 }
+
+/* ---------- animated background ---------- */
+(function(){
+  const cv=document.getElementById("bgParticles");
+  if(!cv)return;
+  const reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const ctx=cv.getContext("2d",{alpha:true});
+  if(!ctx)return;
+  let w=0,h=0,dpr=1,parts=[];
+  function size(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    w=cv.clientWidth;h=cv.clientHeight;
+    cv.width=Math.floor(w*dpr);cv.height=Math.floor(h*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const n=Math.round(Math.min(110,Math.max(38,(w*h)/16000)));
+    parts=Array.from({length:n},()=>({
+      x:Math.random()*w,y:Math.random()*h,
+      r:Math.random()*1.9+.5,
+      vx:(Math.random()-.5)*.16,
+      vy:-(Math.random()*.32+.08),
+      a:Math.random()*.5+.18,
+      t:Math.random()*Math.PI*2,
+      hue:Math.random()<.7?78:190
+    }));
+  }
+  function frame(t){
+    ctx.clearRect(0,0,w,h);
+    for(const p of parts){
+      p.x+=p.vx+Math.sin((t/3400)+p.t)*.12;
+      p.y+=p.vy;
+      if(p.y<-12){p.y=h+12;p.x=Math.random()*w}
+      if(p.x<-12)p.x=w+12; if(p.x>w+12)p.x=-12;
+      const glow=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*9);
+      glow.addColorStop(0,"hsla("+p.hue+",92%,66%,"+p.a+")");
+      glow.addColorStop(1,"hsla("+p.hue+",92%,66%,0)");
+      ctx.fillStyle=glow;ctx.beginPath();ctx.arc(p.x,p.y,p.r*9,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle="hsla("+p.hue+",100%,86%,"+(p.a+.25)+")";
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  let raf=0;
+  function loop(t){
+    frame(t);
+    raf=requestAnimationFrame(loop);
+  }
+  function start(){if(reduce||raf)return;raf=requestAnimationFrame(loop)}
+  function stop(){if(raf){cancelAnimationFrame(raf);raf=0}}
+  size();
+  window.addEventListener("resize",size,{passive:true});
+  if(reduce){ctx.clearRect(0,0,w,h)}else{start()}
+  document.addEventListener("visibilitychange",()=>{document.hidden?stop():start()});
+})();
+
+/* ---------- silent catalog sync ---------- */
+async function syncCatalog(){
+  try{
+    const r=await fetch(DATA_FILE+"?v="+Math.floor(Date.now()/300000),{cache:"no-store"});
+    if(!r.ok)return;
+    const d=await r.json();
+    if(!Array.isArray(d)||!d.length)return;
+    const ok=d.every(g=>g&&g.id&&Array.isArray(g.items)&&g.items.length);
+    if(!ok)return;
+    GAMES=d;
+    renderGames();renderOffers();renderCart();updateSelected();
+    if(currentGame){
+      const fresh=GAMES.find(g=>g.id===currentGame.id);
+      if(fresh)currentGame=fresh;
+      renderModal();
+    }
+  }catch(e){}
+}
+syncCatalog();
+setInterval(syncCatalog,300000);
 
 /* ---------- init ---------- */
 document.getElementById("year").textContent=new Date().getFullYear();
