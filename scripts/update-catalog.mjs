@@ -2,14 +2,29 @@
 /**
  * Sincroniza data.json (paquetes, ofertas y precios) y las portadas en assets/.
  * Se ejecuta en el servidor (GitHub Actions), nunca en el navegador del cliente.
- * La fuente está codificada y solo se resuelve en memoria en tiempo de ejecución.
+ * La fuente vive en un secreto del repositorio (SRC_B64) y solo se resuelve en
+ * memoria durante la ejecución. Nunca se escribe en el código ni en el sitio.
  */
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from "node:fs";
 
-const SOURCE = Buffer.from(
-  process.env.CATALOG_SOURCE_B64 || "aHR0cHM6Ly9vZmljaWFsbmV4dGxldmVsLmNvbQ==",
-  "base64"
-).toString("utf8").replace(/\/+$/, "");
+const SECRET = process.env.SRC_B64 || process.env.CATALOG_SOURCE_B64 || "";
+
+if (!SECRET.trim()) {
+  console.error(
+    "Falta el secreto del repositorio. Configura SRC_B64 con la fuente codificada en Base64."
+  );
+  process.exit(1);
+}
+
+const SOURCE = Buffer.from(SECRET.trim(), "base64")
+  .toString("utf8")
+  .trim()
+  .replace(/\/+$/, "");
+
+if (!/^https?:\/\//.test(SOURCE)) {
+  console.error("El secreto SRC_B64 no contiene una URL válida.");
+  process.exit(1);
+}
 
 const RATE = { cup: 1120, saldo: 335 };
 const OFFSET = { cup: 40, saldo: 20 };
