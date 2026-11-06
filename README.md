@@ -1,29 +1,29 @@
 # NOX — Game Supply
 
-Sitio web de recargas digitales para videojuegos. Precios en **CUP** y **saldo**.
+Sitio de recargas digitales para videojuegos. Precios en **CUP** y **saldo**.
 
-## Catálogo
+## Estructura
 
-| Juego | Unidad |
-|---|---|
-| Free Fire | Diamantes |
-| Blood Strike | Gold (BC) |
-| Mobile Legends | Diamantes |
-| Arena Breakout | Bonos |
-| Roblox | Robux (gift card) |
-| Honor of Kings | Tokens |
-| Genshin Impact | Cristales Génesis |
-| Wuthering Waves | Lunite |
+```
+index.html                     # web completa (todo en un archivo)
+data.json                      # catálogo: juegos, paquetes, ofertas y precios
+assets/                        # portadas de los juegos
+scripts/update-catalog.mjs      # sincronizador del catálogo
+.github/workflows/catalogo.yml  # ejecución automática cada 6 horas
+```
 
-## Regla de precios
+## Actualización del catálogo
 
-Cada paquete muestra dos precios finales, ya con el margen incluido:
+`data.json` se genera solo cada 6 horas con GitHub Actions. La web lo consulta
+cada 5 minutos y refresca precios y ofertas sin recargar la página. Si el archivo
+no está disponible, la web usa el catálogo que ya trae incorporado.
 
-- **CUP** = base en CUP **+ 40 CUP**
-- **Saldo** = base en saldo **+ 20 de saldo**
+- Ejecución manual: pestaña **Actions → Catalogo → Run workflow**.
+- La fuente del catálogo no se consulta desde el navegador: solo la ve el
+  servidor de GitHub Actions y viaja codificada en el workflow.
+- Para cambiar tarifas, edita `RATE` / `OFFSET` en `scripts/update-catalog.mjs`.
 
-El sitio incluye ofertas extra (membresías, pases de batalla, packs con bonus) y recargas de monedas de cada juego.
+## Publicación
 
-## Uso
-
-Abrir `index.html` en el navegador. Para publicarlo con GitHub Pages: Settings → Pages → Branch `main` / root.
+Settings → Pages → Source: *Deploy from a branch* → Branch `main`, carpeta `/ (root)`.
+El sitio queda en `https://<usuario>.github.io/Nox_game_supply/`.
