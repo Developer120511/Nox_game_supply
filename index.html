@@ -477,7 +477,7 @@ function renderGames(){
       +'<span class="card-tag">'+(isGift(g)?"Gift card":"Recarga")+'</span>'
       +(off?'<span class="card-tag offer">'+off+' ofertas</span>':'')
       +'</div><div class="card-body"><h3>'+esc(g.name)+'</h3><span class="unit">'+esc(unitOf(g))+' · '+g.items.length+' paquetes</span>'
-      +'<div class="card-foot"><span class="card-from"><small>Desde</small>'+money(minPrice(g))+'</span><span class="card-go">↗</span></div>'
+      +'<div class="card-foot"><span class="card-from"><small>Desde</small> '+money(minPrice(g))+'</span><span class="card-go">↗</span></div>'
       +'</div></button>';
   }).join("")||'<div class="empty">No encontramos ese juego. Prueba con otro nombre.</div>';
 }
